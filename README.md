@@ -1,1 +1,1 @@
-#Paypal Source
+#CakePHP Paypal REST Client
