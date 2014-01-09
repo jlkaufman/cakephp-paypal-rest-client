@@ -8,7 +8,7 @@
 
 ## Configuration
 
-In `database.php` add the following block:
+In `database.php` add the following block and fill it out accordingly:
 
 ```
 // Paypal

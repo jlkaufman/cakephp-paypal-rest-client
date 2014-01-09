@@ -31,7 +31,7 @@
  */
 App::uses('AppModel', 'Model');
 
-class Payment extends AppModel
+class Paypal extends AppModel
 {
 /**
  * We don't use a DB table

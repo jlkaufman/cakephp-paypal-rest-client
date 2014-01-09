@@ -152,7 +152,8 @@ class PaypalSource extends DataSource
 	public function __construct($config) {
 		define('PAYPAL_TOKEN_EXPIRATION', 28800);
 		parent::__construct($config);
-        $this->Http      = new HttpSocket();
+
+		$this->Http      = new HttpSocket();
 
 		$this->_user_name   = $this->config['username'];
 		$this->_password    = $this->config['password'];
@@ -164,7 +165,7 @@ class PaypalSource extends DataSource
 			$this->api_endpoint = "https://api.paypal.com/v1";
 		}
 
-        $this->_getToken();
+        		$this->_getToken();
 	}
 
 
