@@ -1,12 +1,15 @@
 #CakePHP Paypal REST Client
 
-## Installation
+#### Installation
 
-1. Clone the repo into the `app/Plugins/PaypalSource` directory
+1. Clone the repo into the `app/Plugins/PaypalSource` directory  
 
-`cd app/Plugins && git clone https://github.com/jlkaufman/CakePHP-Paypal-REST-Client.git PaypalSource`
+```
+	cd app/Plugins  
+	git clone https://github.com/jlkaufman/CakePHP-Paypal-REST-Client.git PaypalSource
+```
 
-## Configuration
+#### Configuration
 
 In `database.php` add the following block and fill it out accordingly:
 
@@ -20,3 +23,14 @@ In `database.php` add the following block and fill it out accordingly:
 		'receiver_email' => ''
 	);
 ```
+
+### Usage
+
+#### Including the Paypal Model in your controller
+* Add `PaypalSource.Paypal` to your $uses array.  
+	*E.g.:* `public $uses = array('PaypalSource.Paypal');`  
+	
+	You can now call the model with `$this->Paypal->method();` from your controller.  
+	
+
+## More documentation to come soon!
