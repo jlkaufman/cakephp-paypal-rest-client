@@ -47,7 +47,7 @@ class Paypal extends AppModel
 	public $useDbConfig = 'Paypal';
 
 /**
- * Template of Request array (what we send to the datasource)
+ * Template of Request array (what we send to Paypal)
  * @var array
  */
 	public $requestTemplate = array(
@@ -88,6 +88,7 @@ class Paypal extends AppModel
 
 /**
  * Template of the Response Object returned by the datasource
+ * filled with information returned by Paypal
  * @var array
  */
 	public $responseTemplate = array(
@@ -189,7 +190,6 @@ class Paypal extends AppModel
  * @return object PaymentResponse
  */
 	public function createPaypalPayment($data, $type = null) {
-		$this->_getDatasource('Paypal');
 		$request = array_merge($this->request, $data);
 		return $this->Gateway->createPaypalPayment($request, $this->response, $type);
 	}
@@ -200,7 +200,6 @@ class Paypal extends AppModel
  * @return [type]       [description]
  */
 	public function executePaypalPayment($data) {
-		$this->_getDatasource('Paypal');
 		$request = array_merge($this->request, $data);
 		return $this->Gateway->executePaypalPayment($request, $this->response);
 	}
@@ -281,7 +280,7 @@ class Paypal extends AppModel
 /**
  * Converts an array into an object
  *
- * @param  array $array Array to be converted
+ * @param  array $array
  * @return stdClass
  */
 	private function _arrayToObject($array) {
