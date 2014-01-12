@@ -139,6 +139,7 @@ $data = array(
 ```
 
 #### Capture an Authorization
-To capture an authorization one must create the [Authorization](#credit-card-payment) and get the Authorization ID from the response.
-	
+To capture an authorization one must create the [Authorization](#credit-card-payment) (Credit Card Payment with $type set to `authorization`) and get the Authorization ID from the response.
+
+
 
