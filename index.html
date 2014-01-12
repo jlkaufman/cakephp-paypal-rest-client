@@ -1,0 +1,103 @@
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen"/>
+  <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/script.js"></script>
+
+  <title>Cakephp-paypal-rest-client</title>
+  <meta name="description" content="A CakePHP 2.x plugin REST client for Paypal&#39;s API">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <header>
+      <h1 class="title">Cakephp-paypal-rest-client</h1>
+    </header>
+    <div id="container">
+      <p class="tagline">A CakePHP 2.x plugin REST client for Paypal&#39;s API</p>
+      <div id="main" role="main">
+        <div class="download-bar">
+        <div class="inner">
+          <a href="https://github.com/jlkaufman/CakePHP-Paypal-REST-Client/tarball/master" class="download-button tar"><span>Download</span></a>
+          <a href="https://github.com/jlkaufman/CakePHP-Paypal-REST-Client/zipball/master" class="download-button zip"><span>Download</span></a>
+          <a href="https://github.com/jlkaufman/CakePHP-Paypal-REST-Client" class="code">View Cakephp-paypal-rest-client on GitHub</a>
+        </div>
+        <span class="blc"></span><span class="trc"></span>
+        </div>
+        <article class="markdown-body">
+          <h1>
+<a name="cakephp-paypal-rest-client" class="anchor" href="#cakephp-paypal-rest-client"><span class="octicon octicon-link"></span></a>CakePHP Paypal REST Client</h1>
+
+<h4>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h4>
+
+<ol>
+<li>Clone the repo into the <code>app/Plugins/PaypalSource</code> directory<br>
+</li>
+</ol><pre><code>    cd app/Plugins  
+    git clone https://github.com/jlkaufman/CakePHP-Paypal-REST-Client.git PaypalSource
+</code></pre>
+
+<h4>
+<a name="configuration" class="anchor" href="#configuration"><span class="octicon octicon-link"></span></a>Configuration</h4>
+
+<p>In <code>database.php</code> add the following block and fill it out accordingly:</p>
+
+<pre><code>// Paypal
+    public $Paypal = array(
+        'datasource'     =&gt; 'PaypalSource.PaypalSource',
+        'environment'    =&gt; 'sandbox', // Production: 'production'   SandBox: 'sandbox'
+        'username'       =&gt; '',
+        'password'       =&gt; '',
+        'receiver_email' =&gt; ''
+    );
+</code></pre>
+
+<h3>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h3>
+
+<h4>
+<a name="including-the-paypal-model-in-your-controller" class="anchor" href="#including-the-paypal-model-in-your-controller"><span class="octicon octicon-link"></span></a>Including the Paypal Model in your controller</h4>
+
+<ul>
+<li>
+<p>Add <code>PaypalSource.Paypal</code> to your $uses array.<br><em>E.g.:</em> <code>public $uses = array('PaypalSource.Paypal');</code>  </p>
+
+<p>You can now call the model with <code>$this-&gt;Paypal-&gt;method();</code> from your controller.  </p>
+</li>
+</ul><h2>
+<a name="more-documentation-to-come-soon" class="anchor" href="#more-documentation-to-come-soon"><span class="octicon octicon-link"></span></a>More documentation to come soon!</h2>
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="owner">
+      <p><a href="https://github.com/jlkaufman" class="avatar"><img src="https://2.gravatar.com/avatar/65678493483286e572a1edbe7db90001?d=https%3A%2F%2Fidenticons.github.com%2F84cc6b2f393c3212284eb9a434f4a208.png&amp;r=x&amp;s=60" width="48" height="48"/></a> <a href="https://github.com/jlkaufman">jlkaufman</a> maintains <a href="https://github.com/jlkaufman/CakePHP-Paypal-REST-Client">Cakephp-paypal-rest-client</a></p>
+
+
+      </div>
+      <div class="creds">
+        <small>This page generated using <a href="http://pages.github.com/">GitHub Pages</a><br/>theme by <a href="https://twitter.com/jonrohan/">Jon Rohan</a></small>
+      </div>
+    </footer>
+  </div>
+  <div class="current-section">
+    <a href="#top">Scroll to top</a>
+    <a href="https://github.com/jlkaufman/CakePHP-Paypal-REST-Client/tarball/master" class="tar">tar</a><a href="https://github.com/jlkaufman/CakePHP-Paypal-REST-Client/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
+    <p class="name"></p>
+  </div>
+
+  
+</body>
+</html>
