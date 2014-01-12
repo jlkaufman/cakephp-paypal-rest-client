@@ -275,8 +275,6 @@ class Paypal extends AppModel
 	}
 
 
-
-
 /**
  * Converts an array into an object
  *
