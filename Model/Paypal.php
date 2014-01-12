@@ -180,7 +180,7 @@ class Paypal extends AppModel
 	public function creditCardPayment($data, $type = null) {
 		$request = array_merge($this->request, $data);
 
-		return $this->Gateway->creditCardPayment($request, $this->response, $type);
+		return $this->Paypal->creditCardPayment($request, $this->response, $type);
 	}
 
 /**
@@ -191,7 +191,7 @@ class Paypal extends AppModel
  */
 	public function createPaypalPayment($data, $type = null) {
 		$request = array_merge($this->request, $data);
-		return $this->Gateway->createPaypalPayment($request, $this->response, $type);
+		return $this->Paypal->createPaypalPayment($request, $this->response, $type);
 	}
 
 /**
@@ -201,7 +201,7 @@ class Paypal extends AppModel
  */
 	public function executePaypalPayment($data) {
 		$request = array_merge($this->request, $data);
-		return $this->Gateway->executePaypalPayment($request, $this->response);
+		return $this->Paypal->executePaypalPayment($request, $this->response);
 	}
 
 /**
@@ -211,7 +211,7 @@ class Paypal extends AppModel
  */
 	public function captureAuthorization($data) {
 		$request = array_merge($this->request, $data);
-		return $this->Gateway->captureAuthorization($request, $this->response);
+		return $this->Paypal->captureAuthorization($request, $this->response);
 	}
 
 /**
@@ -221,7 +221,7 @@ class Paypal extends AppModel
  */
 	public function voidAuthorization($data) {
 		$request = array_merge($this->request, $data);
-		return $this->Gateway->voidAuthorization($request, $this->response);
+		return $this->Paypal->voidAuthorization($request, $this->response);
 	}
 
 /**
@@ -232,7 +232,7 @@ class Paypal extends AppModel
  */
 	public function refundPayment($data, $type = null) {
 		$request = array_merge($this->request, $data);
-		return $this->Gateway->refundPayment($request, $this->response, $type);
+		return $this->Paypal->refundPayment($request, $this->response, $type);
 	}
 
 /**
@@ -242,7 +242,7 @@ class Paypal extends AppModel
  */
 	public function storeCreditCard($data) {
 		$request = array_merge($this->request, $data);
-		return $this->Gateway->storeCreditCard($request, $this->response);
+		return $this->Paypal->storeCreditCard($request, $this->response);
 	}
 
 /**
@@ -252,7 +252,7 @@ class Paypal extends AppModel
  */
 	public function getStoredCreditCardStatus($data) {
 		$request = array_merge($this->request, $data);
-		return $this->Gateway->getStoredCreditCardStatus($request, $this->response);
+		return $this->Paypal->getStoredCreditCardStatus($request, $this->response);
 	}
 
 /**
@@ -262,16 +262,16 @@ class Paypal extends AppModel
  */
 	public function deleteStoredCreditCard($data) {
 		$request = array_merge($this->request, $data);
-		return $this->Gateway->deleteStoredCreditCard($request, $this->response);
+		return $this->Paypal->deleteStoredCreditCard($request, $this->response);
 	}
 
 /**
- * Grabs a datasource and sets it to $this->Gateway
+ * Grabs a datasource and sets it to $this->Paypal
  * @param  string $datasource name of the datasource config
  * @return void
  */
 	private function _getDatasource($datasource = null) {
-		$this->Gateway = $this->getDataSource($datasource);
+		$this->Paypal = $this->getDataSource($datasource);
 	}
 
 
