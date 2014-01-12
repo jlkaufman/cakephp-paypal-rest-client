@@ -37,10 +37,9 @@ In `database.php` add the following block and fill it out accordingly:
 
 Credit card payments are easy to create. We can do one of two things; we can create a sale (a final payment), or we can authorize an amount that we will capture later.
 
-To create a creditcard payment, call `$this->Paypal->creditCardPayment($data, $type)` 
-
 * $data will contain all the information we're going to send to Paypal
-	Here's an example:	
+
+Here's an example:	
 
 ```
 $data = array(
@@ -74,6 +73,8 @@ $data = array(
 		"description" => "This is the payment transaction description."
 	)
 );
+
+$response = $this->Paypal->creditCardPayment($data, $type);
 	
 ```	
 * $type can either be `authorization` or `sale`  
@@ -141,9 +142,7 @@ $data = array(
 #### Capture an Authorization
 To capture an authorization one must create the [Authorization](#credit-card-payment) (Credit Card Payment with $type set to `authorization`) and get the Authorization ID from the response.
 
-To capture the authorization, call `$this->Paypal->captureAuthorization($data);`
-
-In this case, `$data` will contain the following:
+Here's an example of capturing an authorization:
 
 ```
 $capture_data = array(
@@ -152,6 +151,8 @@ $capture_data = array(
 	'total'            => '7.47',
 	'is_final_capture' => true
 );
+
+$response = $this->Paypal->captureAuthorization($data);
 ```
 * `authorization_id` is stored in the response object returned by `Paypal::creditCardPayment()` in `$response->transaction->authorization->id`
 
@@ -207,4 +208,75 @@ $capture_data = array(
 }
 ```
 
+#### Void an Authorization
+There are all sorts of reasons one would void an authorization (client canceled the transaction, some other reason that would mean you shoudln't be charging them, whatever).
+
+To void an authorization one must create the [Authorization](#credit-card-payment) (Credit Card Payment with $type set to `authorization`) and get the Authorization ID from the response.
+
+Here's an example of voiding an authorization:
+
+```
+$data = array(
+	'authorization_id' => '2073151243457584H'
+);
+
+$response = $this->Paypal->voidAuthorization($data);
+```
+* `authorization_id` is stored in the response object returned by `Paypal::creditCardPayment()` in `$response->transaction->authorization->id`
+
+##### Example Response
+```
+{
+   "id": "2073151243457584H",
+   "status": "voided",
+   "created": "2014-01-12 14:36:48",
+   "modified": "2014-01-12 14:37:00",
+   "payment_method": null,
+   "type": null,
+   "payer": {
+      "billing_address": {
+         "line1": "",
+         "line2": "",
+         "city": "",
+         "country_code": "",
+         "postal_code": "",
+         "state": ""
+      },
+      "credit_card": {
+         "number": "",
+         "type": "",
+         "expire_month": "",
+         "expire_year": "",
+         "first_name": "",
+         "last_name": ""
+      },
+      "id": "",
+      "email": ""
+   },
+   "approval_url": "",
+   "transaction": {
+      "amount": {
+         "total": "7.47",
+         "currency": "USD",
+         "details": {
+            "subtotal": "7.41",
+            "tax": "0.03",
+            "shipping": "0.03"
+         }
+      },
+      "description": null,
+      "sale": {
+         "id": "",
+         "parent_id": ""
+      },
+      "authorization": {
+         "id": "",
+         "created": ""
+      }
+   },
+   "error": {
+      "code": false
+   }
+}
+```
 
