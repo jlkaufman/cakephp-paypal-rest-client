@@ -141,5 +141,70 @@ $data = array(
 #### Capture an Authorization
 To capture an authorization one must create the [Authorization](#credit-card-payment) (Credit Card Payment with $type set to `authorization`) and get the Authorization ID from the response.
 
+To capture the authorization, call `$this->Paypal->captureAuthorization($data);`
+
+In this case, `$data` will contain the following:
+
+```
+$capture_data = array(
+	'authorization_id' => '10V50318J8770814T',
+	'currency'         => 'USD',
+	'total'            => '7.47',
+	'is_final_capture' => true
+);
+```
+* `authorization_id` is stored in the response object returned by `Paypal::creditCardPayment()` in `$response->transaction->authorization->id`
+
+##### Example Capture Response
+
+```
+{
+   "id": "2E448764JU789501Y",
+   "status": "completed",
+   "created": "2014-01-12 10:57:30",
+   "modified": "2014-01-12 10:57:42",
+   "payment_method": null,
+   "type": "capture",
+   "payer": {
+      "billing_address": {
+         "line1": "",
+         "line2": "",
+         "city": "",
+         "country_code": "",
+         "postal_code": "",
+         "state": ""
+      },
+      "credit_card": {
+         "number": "",
+         "type": "",
+         "expire_month": "",
+         "expire_year": "",
+         "first_name": "",
+         "last_name": ""
+      },
+      "id": "",
+      "email": ""
+   },
+   "approval_url": "",
+   "transaction": {
+      "amount": {
+         "total": "7.47",
+         "currency": "USD"
+      },
+      "description": null,
+      "sale": {
+         "id": "",
+         "parent_id": ""
+      },
+      "authorization": {
+         "id": "",
+         "created": ""
+      }
+   },
+   "error": {
+      "code": false
+   }
+}
+```
 
 
