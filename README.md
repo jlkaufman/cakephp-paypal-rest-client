@@ -32,6 +32,11 @@ In `database.php` add the following block and fill it out accordingly:
 	
 	You can now call the model with `$this->Paypal->method();` from your controller.  
 	
+#### Notes about response returned
+All the methods in the Paypal class will return an instance of StdClass. In the documentation we show the object in JSON form, simply for readability. You can access each member of the object using arrow notation. 
+
+> E.g.: `$response->transaction->authorization->id`
+	
 
 #### Credit Card Payment
 
