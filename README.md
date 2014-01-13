@@ -57,7 +57,7 @@ Credit card payments are easy to create. We can do one of two things; we can cre
 
 * $data will contain all the information we're going to send to Paypal
 
-Here's an example:	
+Credit Card:	
 
 ```
 $data = array(
@@ -95,6 +95,29 @@ $data = array(
 $response = $this->Paypal->creditCardPayment($data, $type);
 	
 ```	
+Credit Card Token:
+
+```
+$data = array(
+	'credit_card_token' => array(
+		"credit_card_id" => "CARD-7VH15004HC811510SKEGDHDI"
+	),
+	'transaction' => array(
+		"amount" => array(
+			"total"    => "7.47",
+			"currency" => "USD",
+			"details"  => array(
+				"subtotal" => "7.41",
+				"tax"      => "0.03",
+				"shipping" => "0.03"
+			)
+		),
+		"description" => "This is the payment transaction description."
+	)
+);
+
+$response = $this->Paypal->creditCardPayment($data, $type);             
+```
 * $type can either be `authorization` or `sale`  
 	`sale`: A final sale, and will complete the transaction  
 	`authorization`: Authorize the card for the amount specified. We will have to capture the payment later.

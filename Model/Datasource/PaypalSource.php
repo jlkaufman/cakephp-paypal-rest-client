@@ -191,13 +191,21 @@ class PaypalSource extends DataSource
 	 public function creditCardPayment(array $request, stdClass $response, $type = null) {
 	 	$this->_response = $response;
 		$type = $this->_saleType($type);
-		$request['credit_card']['billing_address'] = $request['billing_address'];
+
+		if (isset($request['credit_card'])) {
+			$funding_type = 'credit_card';
+			$request['credit_card']['billing_address'] = $request['billing_address'];
+		} elseif (isset($request['credit_card_token'])) {
+			$funding_type = 'credit_card_token';
+		}
+
+
 		$this->_payload = array(
 			'intent' => $type,
 			'payer' => array(
 				'payment_method'      => 'credit_card',
 				'funding_instruments' => array(
-					array('credit_card' => $request['credit_card'])
+					array($funding_type => $request[$funding_type])
 				)
 			),
 			'transactions' => array($request['transaction'])

@@ -178,9 +178,7 @@ class Paypal extends AppModel
  * @return object PaymentResponse
  */
 	public function creditCardPayment($data, $type = null) {
-		$request = array_merge($this->request, $data);
-
-		return $this->Paypal->creditCardPayment($request, $this->response, $type);
+		return $this->Paypal->creditCardPayment($data, $this->response, $type);
 	}
 
 /**
@@ -190,8 +188,7 @@ class Paypal extends AppModel
  * @return object PaymentResponse
  */
 	public function createPaypalPayment($data, $type = null) {
-		$request = array_merge($this->request, $data);
-		return $this->Paypal->createPaypalPayment($request, $this->response, $type);
+		return $this->Paypal->createPaypalPayment($data, $this->response, $type);
 	}
 
 /**
@@ -200,8 +197,7 @@ class Paypal extends AppModel
  * @return [type]       [description]
  */
 	public function executePaypalPayment($data) {
-		$request = array_merge($this->request, $data);
-		return $this->Paypal->executePaypalPayment($request, $this->response);
+		return $this->Paypal->executePaypalPayment($data, $this->response);
 	}
 
 /**
@@ -210,8 +206,7 @@ class Paypal extends AppModel
  * @return object
  */
 	public function captureAuthorization($data) {
-		$request = array_merge($this->request, $data);
-		return $this->Paypal->captureAuthorization($request, $this->response);
+		return $this->Paypal->captureAuthorization($data, $this->response);
 	}
 
 /**
@@ -220,8 +215,7 @@ class Paypal extends AppModel
  * @return object
  */
 	public function voidAuthorization($data) {
-		$request = array_merge($this->request, $data);
-		return $this->Paypal->voidAuthorization($request, $this->response);
+		return $this->Paypal->voidAuthorization($data, $this->response);
 	}
 
 /**
@@ -231,8 +225,7 @@ class Paypal extends AppModel
  * @return object
  */
 	public function refundPayment($data, $type = null) {
-		$request = array_merge($this->request, $data);
-		return $this->Paypal->refundPayment($request, $this->response, $type);
+		return $this->Paypal->refundPayment($data, $this->response, $type);
 	}
 
 /**
@@ -241,8 +234,7 @@ class Paypal extends AppModel
  * @return object
  */
 	public function storeCreditCard($data) {
-		$request = array_merge($this->request, $data);
-		return $this->Paypal->storeCreditCard($request, $this->response);
+		return $this->Paypal->storeCreditCard($data, $this->response);
 	}
 
 /**
@@ -251,8 +243,7 @@ class Paypal extends AppModel
  * @return object
  */
 	public function getStoredCreditCardStatus($data) {
-		$request = array_merge($this->request, $data);
-		return $this->Paypal->getStoredCreditCardStatus($request, $this->response);
+		return $this->Paypal->getStoredCreditCardStatus($data, $this->response);
 	}
 
 /**
@@ -261,8 +252,7 @@ class Paypal extends AppModel
  * @return object
  */
 	public function deleteStoredCreditCard($data) {
-		$request = array_merge($this->request, $data);
-		return $this->Paypal->deleteStoredCreditCard($request, $this->response);
+		return $this->Paypal->deleteStoredCreditCard($data, $this->response);
 	}
 
 /**
