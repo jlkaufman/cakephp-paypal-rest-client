@@ -34,11 +34,37 @@
         <h1>
 <a name="cakephp-paypal-rest-client" class="anchor" href="#cakephp-paypal-rest-client"><span class="octicon octicon-link"></span></a>CakePHP Paypal REST Client</h1>
 
-<h4>
+<h3>
+<a name="introduction" class="anchor" href="#introduction"><span class="octicon octicon-link"></span></a>Introduction</h3>
+
+<p>This plugin is a full REST client for Paypal's API. It implements all of the functions available through the Paypal REST API.  </p>
+
+<p>Instead of using CURL, CakePHP's HTTPSocket class is used.</p>
+
+<h3>
+<a name="documentation-table-of-contents" class="anchor" href="#documentation-table-of-contents"><span class="octicon octicon-link"></span></a>Documentation: Table of Contents</h3>
+
+<ol>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#configuration">Configuration</a></li>
+<li>
+<a href="#usage">Usage</a>
+
+<ul>
+<li>
+<a href="#including-the-paypal-model-in-your-controller">Including the Paypal Model in your controller</a> </li>
+<li><a href="#notes-about-response-returned">Notes about response returned</a></li>
+<li><a href="#credit-card-payment">Credit Card Payment</a></li>
+<li><a href="#capture-an-authorization">Capture an Authorization</a></li>
+<li><a href="#void-an-authorization">Void an Authorization</a></li>
+<li><a href="#refund-a-sale">Refund a sale</a></li>
+</ul>
+</li>
+</ol><h4>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h4>
 
 <ol>
-<li>Clone the repo into the <code>app/Plugins/PaypalSource</code> directory<br>
+<li>Clone the repository into the <code>app/Plugins/PaypalSource</code> directory<br>
 </li>
 </ol><pre><code>    cd app/Plugins  
     git clone https://github.com/jlkaufman/CakePHP-Paypal-REST-Client.git PaypalSource
@@ -71,8 +97,336 @@
 
 <p>You can now call the model with <code>$this-&gt;Paypal-&gt;method();</code> from your controller.  </p>
 </li>
-</ul><h2>
-<a name="more-documentation-to-come-soon" class="anchor" href="#more-documentation-to-come-soon"><span class="octicon octicon-link"></span></a>More documentation to come soon!</h2>
+</ul><h4>
+<a name="notes-about-response-returned" class="anchor" href="#notes-about-response-returned"><span class="octicon octicon-link"></span></a>Notes about response returned</h4>
+
+<p>All the methods in the Paypal class will return an instance of StdClass. In the documentation we show the object in JSON form, simply for readability. You can access each member of the object using arrow notation. </p>
+
+<h4>
+<a name="credit-card-payment" class="anchor" href="#credit-card-payment"><span class="octicon octicon-link"></span></a>Credit Card Payment</h4>
+
+<p>Credit card payments are easy to create. We can do one of two things; we can create a sale (a final payment), or we can authorize an amount that we will capture later.</p>
+
+<ul>
+<li>$data will contain all the information we're going to send to Paypal</li>
+</ul><p>Here's an example:  </p>
+
+<pre><code>$data = array(
+    'credit_card' =&gt; array(
+        "number"       =&gt; "4417119669820331",
+        "type"         =&gt; "visa",
+        "expire_month" =&gt; 1,
+        "expire_year"  =&gt; 2018,
+        "cvv2"         =&gt; "874",
+        "first_name"   =&gt; "Joe",
+        "last_name"    =&gt; "Shopper"
+    ),
+    'billing_address' =&gt; array(
+        "line1"        =&gt; "52 N Main ST",
+        "line2"        =&gt; "Apt. 211",
+        "city"         =&gt; "Johnstown",
+        "country_code" =&gt; "CA",
+        "postal_code"  =&gt; "H0H 0H0",
+        "state"        =&gt; "Quebec"
+    ),
+    'transaction' =&gt; array(
+        "amount" =&gt; array(
+            "total"    =&gt; "7.47",
+            "currency" =&gt; "USD",
+            "details"  =&gt; array(
+                "subtotal" =&gt; "7.41",
+                "tax"      =&gt; "0.03",
+                "shipping" =&gt; "0.03"
+            )
+        ),
+        "description" =&gt; "This is the payment transaction description."
+    )
+);
+
+$response = $this-&gt;Paypal-&gt;creditCardPayment($data, $type);
+
+</code></pre>
+
+<ul>
+<li>$type can either be <code>authorization</code> or <code>sale</code><br><code>sale</code>: A final sale, and will complete the transaction<br><code>authorization</code>: Authorize the card for the amount specified. We will have to capture the payment later.</li>
+</ul><h5>
+<a name="example-response" class="anchor" href="#example-response"><span class="octicon octicon-link"></span></a>Example response</h5>
+
+<pre><code>{
+   "id": "PAY-30J08441N2038343CKLJHKEA",
+   "status": "approved",
+   "created": "2014-01-12 10:57:20",
+   "modified": "2014-01-12 10:57:29",
+   "payment_method": "credit_card",
+   "type": "authorize",
+   "payer": {
+      "billing_address": {
+         "line1": "52 N Main ST",
+         "line2": "Apt. 211",
+         "city": "Johnstown",
+         "state": "Quebec",
+         "postal_code": "H0H 0H0",
+         "country_code": "CA"
+      },
+      "credit_card": {
+         "type": "visa",
+         "number": "xxxxxxxxxxxx0331",
+         "expire_month": "1",
+         "expire_year": "2018",
+         "first_name": "Joe",
+         "last_name": "Shopper"
+      },
+      "id": "",
+      "email": ""
+   },
+   "approval_url": "",
+   "transaction": {
+      "amount": {
+         "total": "7.47",
+         "currency": "USD",
+         "details": {
+            "subtotal": "7.41",
+            "tax": "0.03",
+            "shipping": "0.03"
+         }
+      },
+      "description": "This is the payment transaction description.",
+      "sale": {
+         "id": "",
+         "parent_id": ""
+      },
+      "authorization": {
+         "id": "10V50318J8770814T",
+         "created": "2014-01-12 10:57:20",
+         "parent_id": "PAY-30J08441N2038343CKLJHKEA"
+      }
+   },
+   "error": {
+      "code": false
+   }
+}
+</code></pre>
+
+<h4>
+<a name="capture-an-authorization" class="anchor" href="#capture-an-authorization"><span class="octicon octicon-link"></span></a>Capture an Authorization</h4>
+
+<p>To capture an authorization one must create the <a href="#credit-card-payment">Authorization</a> (Credit Card Payment with $type set to <code>authorization</code>) and get the Authorization ID from the response.</p>
+
+<p>Here's an example of capturing an authorization:</p>
+
+<pre><code>$capture_data = array(
+    'authorization_id' =&gt; '10V50318J8770814T',
+    'currency'         =&gt; 'USD',
+    'total'            =&gt; '7.47',
+    'is_final_capture' =&gt; true
+);
+
+$response = $this-&gt;Paypal-&gt;captureAuthorization($data);
+</code></pre>
+
+<ul>
+<li>
+<code>authorization_id</code> is stored in the response object returned by <code>Paypal::creditCardPayment()</code> in <code>$response-&gt;transaction-&gt;authorization-&gt;id</code>
+</li>
+</ul><h5>
+<a name="example-capture-response" class="anchor" href="#example-capture-response"><span class="octicon octicon-link"></span></a>Example Capture Response</h5>
+
+<pre><code>{
+   "id": "2E448764JU789501Y",
+   "status": "completed",
+   "created": "2014-01-12 10:57:30",
+   "modified": "2014-01-12 10:57:42",
+   "payment_method": null,
+   "type": "capture",
+   "payer": {
+      "billing_address": {
+         "line1": "",
+         "line2": "",
+         "city": "",
+         "country_code": "",
+         "postal_code": "",
+         "state": ""
+      },
+      "credit_card": {
+         "number": "",
+         "type": "",
+         "expire_month": "",
+         "expire_year": "",
+         "first_name": "",
+         "last_name": ""
+      },
+      "id": "",
+      "email": ""
+   },
+   "approval_url": "",
+   "transaction": {
+      "amount": {
+         "total": "7.47",
+         "currency": "USD"
+      },
+      "description": null,
+      "sale": {
+         "id": "",
+         "parent_id": ""
+      },
+      "authorization": {
+         "id": "",
+         "created": ""
+      }
+   },
+   "error": {
+      "code": false
+   }
+}
+</code></pre>
+
+<h4>
+<a name="void-an-authorization" class="anchor" href="#void-an-authorization"><span class="octicon octicon-link"></span></a>Void an Authorization</h4>
+
+<p>There are all sorts of reasons one would void an authorization (client canceled the transaction, some other reason that would mean you shoudln't be charging them, whatever).</p>
+
+<p>To void an authorization one must create the <a href="#credit-card-payment">Authorization</a> (Credit Card Payment with $type set to <code>authorization</code>) and get the Authorization ID from the response.</p>
+
+<p>Here's an example of voiding an authorization:</p>
+
+<pre><code>$data = array(
+    'authorization_id' =&gt; '2073151243457584H'
+);
+
+$response = $this-&gt;Paypal-&gt;voidAuthorization($data);
+</code></pre>
+
+<ul>
+<li>
+<code>authorization_id</code> is stored in the response object returned by <code>Paypal::creditCardPayment()</code> in <code>$response-&gt;transaction-&gt;authorization-&gt;id</code>
+</li>
+</ul><h5>
+<a name="example-response-1" class="anchor" href="#example-response-1"><span class="octicon octicon-link"></span></a>Example Response</h5>
+
+<pre><code>{
+   "id": "2073151243457584H",
+   "status": "voided",
+   "created": "2014-01-12 14:36:48",
+   "modified": "2014-01-12 14:37:00",
+   "payment_method": null,
+   "type": null,
+   "payer": {
+      "billing_address": {
+         "line1": "",
+         "line2": "",
+         "city": "",
+         "country_code": "",
+         "postal_code": "",
+         "state": ""
+      },
+      "credit_card": {
+         "number": "",
+         "type": "",
+         "expire_month": "",
+         "expire_year": "",
+         "first_name": "",
+         "last_name": ""
+      },
+      "id": "",
+      "email": ""
+   },
+   "approval_url": "",
+   "transaction": {
+      "amount": {
+         "total": "7.47",
+         "currency": "USD",
+         "details": {
+            "subtotal": "7.41",
+            "tax": "0.03",
+            "shipping": "0.03"
+         }
+      },
+      "description": null,
+      "sale": {
+         "id": "",
+         "parent_id": ""
+      },
+      "authorization": {
+         "id": "",
+         "created": ""
+      }
+   },
+   "error": {
+      "code": false
+   }
+}
+</code></pre>
+
+<h4>
+<a name="refund-a-sale" class="anchor" href="#refund-a-sale"><span class="octicon octicon-link"></span></a>Refund a sale</h4>
+
+<p>Sometimes it's necessary to refund a transaction.
+To refund a sale one must first create the <a href="#credit-card-payment">Sale</a> (Credit Card Payment with $type set to <code>sale</code>) and get the Sale ID from the response.</p>
+
+<pre><code>$data = array(
+    'payment_id' =&gt; '3XX41928KR179661L',
+    'currency'   =&gt; 'USD',
+    'total'      =&gt; '7.47'
+);
+
+$response = $this-&gt;Paypal-&gt;refundPayment($data);
+</code></pre>
+
+<ul>
+<li>
+<code>payment_id</code> is stored in the response object returned by <code>Paypal::creditCardPayment()</code> in <code>$response-&gt;transaction-&gt;sale-&gt;id</code>
+</li>
+</ul><h5>
+<a name="example-response-2" class="anchor" href="#example-response-2"><span class="octicon octicon-link"></span></a>Example Response</h5>
+
+<pre><code>{
+   "id": "7FN74449PP796325P",
+   "status": "completed",
+   "created": "2014-01-13 16:31:24",
+   "modified": "2014-01-13 16:31:24",
+   "payment_method": null,
+   "type": "refund",
+   "payer": {
+      "billing_address": {
+         "line1": "",
+         "line2": "",
+         "city": "",
+         "country_code": "",
+         "postal_code": "",
+         "state": ""
+      },
+      "credit_card": {
+         "number": "",
+         "type": "",
+         "expire_month": "",
+         "expire_year": "",
+         "first_name": "",
+         "last_name": ""
+      },
+      "id": "",
+      "email": ""
+   },
+   "approval_url": "",
+   "transaction": {
+      "amount": {
+         "total": "7.47",
+         "currency": "USD"
+      },
+      "description": null,
+      "sale": {
+         "id": "",
+         "parent_id": ""
+      },
+      "authorization": {
+         "id": "",
+         "created": ""
+      }
+   },
+   "error": {
+      "code": false
+   }
+}
+</code></pre>
       </section>
     </div>
 
