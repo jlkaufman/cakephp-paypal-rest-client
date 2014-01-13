@@ -1,5 +1,16 @@
 #CakePHP Paypal REST Client
 
+### Table of Contents
+1. [Installation](#installation)
+2. [Configuration](#configuration)
+3. Usage
+	- [Including the Paypal Model in your controller](#including-the-paypal-model-in-your-controller) 
+	- [Notes about response returned](#notes-about-response-returned)
+	- [Credit Card Payment](#credit-card-payment)
+	- [Capture an Authorization](#capture-an-authorization)
+	- [Void an Authorization](#void-an-authorization)
+	- [Refund a sale](#refund-a-sale)
+
 #### Installation
 
 1. Clone the repository into the `app/Plugins/PaypalSource` directory  
@@ -282,3 +293,69 @@ $response = $this->Paypal->voidAuthorization($data);
 }
 ```
 
+#### Refund a sale
+
+Sometimes it's necessary to refund a transaction.
+To refund a sale one must first create the [Sale](#credit-card-payment) (Credit Card Payment with $type set to `sale`) and get the Sale ID from the response.
+
+```
+$data = array(
+	'payment_id' => '3XX41928KR179661L',
+	'currency'   => 'USD',
+	'total'      => '7.47'
+);
+
+$response = $this->Paypal->refundPayment($data);
+```
+* `payment_id` is stored in the response object returned by `Paypal::creditCardPayment()` in `$response->transaction->sale->id`
+
+##### Example Response
+```
+{
+   "id": "7FN74449PP796325P",
+   "status": "completed",
+   "created": "2014-01-13 16:31:24",
+   "modified": "2014-01-13 16:31:24",
+   "payment_method": null,
+   "type": "refund",
+   "payer": {
+      "billing_address": {
+         "line1": "",
+         "line2": "",
+         "city": "",
+         "country_code": "",
+         "postal_code": "",
+         "state": ""
+      },
+      "credit_card": {
+         "number": "",
+         "type": "",
+         "expire_month": "",
+         "expire_year": "",
+         "first_name": "",
+         "last_name": ""
+      },
+      "id": "",
+      "email": ""
+   },
+   "approval_url": "",
+   "transaction": {
+      "amount": {
+         "total": "7.47",
+         "currency": "USD"
+      },
+      "description": null,
+      "sale": {
+         "id": "",
+         "parent_id": ""
+      },
+      "authorization": {
+         "id": "",
+         "created": ""
+      }
+   },
+   "error": {
+      "code": false
+   }
+}
+```
