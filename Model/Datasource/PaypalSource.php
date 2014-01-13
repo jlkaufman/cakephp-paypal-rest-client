@@ -515,10 +515,9 @@ class PaypalSource extends DataSource
  * @param  object $response Response object
  */
 	private function _handleError(&$response) {
-		$this->_response->status      = 'error';
-		$this->_response->error       = json_decode($response->body);
-		$this->_response->error->code = $response->code;
-
+		$this->_response->status       = 'error';
+		$this->_response->error        = json_decode($response->body);
+		@$this->_response->error->code = $response->code;
 
 		$this->_setResponse($response);
 	}
