@@ -1,8 +1,11 @@
-#CakePHP Paypal REST Client
+#CakePHP Paypal REST Client (PaypalSource)
 ### Introduction
 This plugin is a full REST client for Paypal's API. It implements all of the functions available through the Paypal REST API.  
 
 Instead of using CURL, CakePHP's HTTPSocket class is used.
+
+#### Disclaimer
+*Alpha Version... Probably a good idea not to use this in production yet...*
 
 
 ### Documentation: Table of Contents
@@ -22,9 +25,15 @@ Instead of using CURL, CakePHP's HTTPSocket class is used.
 
 ```
 	cd app/Plugins  
-	git clone https://github.com/jlkaufman/CakePHP-Paypal-REST-Client.git PaypalSource
+	git clone https://github.com/jlkaufman/cakephp-paypal-rest-client.git PaypalSource
 ```
 
+2. Install with *composer*
+```
+	"require": {
+        "jlkaufman/cakephp-paypal-rest-client": "0.1-alpha"
+    }
+```
 #### Configuration
 
 In `database.php` add the following block and fill it out accordingly:
