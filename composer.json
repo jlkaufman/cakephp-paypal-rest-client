@@ -3,7 +3,7 @@
     "description": "This plugin is a full REST client for Paypal's API. It implements all of the functions available through the Paypal REST API.",
     "type": "cakephp-plugin",
     "homepage": "http://jlkaufman.github.io/cakephp-paypal-rest-client",
-    "license": "MIT",
+    "license": "FreeBSD License",
     "authors": [
         {
             "name": "Justin Kaufman",
