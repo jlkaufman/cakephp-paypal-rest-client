@@ -29,7 +29,7 @@
       <div class="inner clearfix">
         <section id="main-content">
           <h1>
-<a name="cakephp-paypal-rest-client" class="anchor" href="#cakephp-paypal-rest-client"><span class="octicon octicon-link"></span></a>CakePHP Paypal REST Client</h1>
+<a name="cakephp-paypal-rest-client-paypalsource" class="anchor" href="#cakephp-paypal-rest-client-paypalsource"><span class="octicon octicon-link"></span></a>CakePHP Paypal REST Client (PaypalSource)</h1>
 
 <h3>
 <a name="introduction" class="anchor" href="#introduction"><span class="octicon octicon-link"></span></a>Introduction</h3>
@@ -37,6 +37,11 @@
 <p>This plugin is a full REST client for Paypal's API. It implements all of the functions available through the Paypal REST API.  </p>
 
 <p>Instead of using CURL, CakePHP's HTTPSocket class is used.</p>
+
+<h4>
+<a name="disclaimer" class="anchor" href="#disclaimer"><span class="octicon octicon-link"></span></a>Disclaimer</h4>
+
+<p><em>Alpha Version... Probably a good idea not to use this in production yet...</em></p>
 
 <h3>
 <a name="documentation-table-of-contents" class="anchor" href="#documentation-table-of-contents"><span class="octicon octicon-link"></span></a>Documentation: Table of Contents</h3>
@@ -64,7 +69,15 @@
 <li>Clone the repository into the <code>app/Plugins/PaypalSource</code> directory<br>
 </li>
 </ol><pre><code>    cd app/Plugins  
-    git clone https://github.com/jlkaufman/CakePHP-Paypal-REST-Client.git PaypalSource
+    git clone https://github.com/jlkaufman/cakephp-paypal-rest-client.git PaypalSource
+</code></pre>
+
+<ol>
+<li>Install with <em>composer</em>
+</li>
+</ol><pre><code>    "require": {
+        "jlkaufman/cakephp-paypal-rest-client": "0.1-alpha"
+    }
 </code></pre>
 
 <h4>
