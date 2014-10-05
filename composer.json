@@ -1,0 +1,21 @@
+{
+    "name": "jlkaufman/CakePHP-Paypal-REST-Client",
+    "description": "This plugin is a full REST client for Paypal's API. It implements all of the functions available through the Paypal REST API.",
+    "type": "cakephp-plugin",
+    "homepage": "http://jlkaufman.github.io/CakePHP-Paypal-REST-Client",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Justin Kaufman",
+            "role": "Author"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/jlkaufman/CakePHP-Paypal-REST-Client/issues",
+        "source": "https://github.com/jlkaufman/CakePHP-Paypal-REST-Client"
+    },
+    "require": {
+        "php": ">=5.3.0",
+        "composer/installers": "*"
+    }
+}

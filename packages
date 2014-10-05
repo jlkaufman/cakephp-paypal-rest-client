@@ -1,8 +1,0 @@
-{
-    "packages": {
-        "jlkaufman/CakePHP-Paypal-REST-Client": {
-            "dev-master": { @composer.json },
-            "v0.1-alpha": { @composer.json }
-        }
-    }
-}
