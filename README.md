@@ -21,18 +21,18 @@ Instead of using CURL, CakePHP's HTTPSocket class is used.
 
 #### Installation
 
-1. Clone the repository into the `app/Plugins/PaypalSource` directory  
+1) Clone the repository into the `app/Plugins/PaypalSource` directory  
 
 ```
-	cd app/Plugins  
-	git clone https://github.com/jlkaufman/cakephp-paypal-rest-client.git PaypalSource
+cd app/Plugins  
+git clone https://github.com/jlkaufman/cakephp-paypal-rest-client.git PaypalSource
 ```
+2) Install with *composer*  
 
-2. Install with *composer*
 ```
-	"require": {
-        "jlkaufman/cakephp-paypal-rest-client": "0.1-alpha"
-    }
+require": {
+    "jlkaufman/cakephp-paypal-rest-client": "0.1-alpha"
+}
 ```
 #### Configuration
 
