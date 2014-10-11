@@ -62,22 +62,22 @@
 <li><a href="#refund-a-sale">Refund a sale</a></li>
 </ul>
 </li>
-</ol><h4>
+</ol>
+
+<h4>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h4>
 
-<ol>
-<li>Clone the repository into the <code>app/Plugins/PaypalSource</code> directory<br>
-</li>
-</ol><pre><code>    cd app/Plugins  
-    git clone https://github.com/jlkaufman/cakephp-paypal-rest-client.git PaypalSource
+<p>1) Clone the repository into the <code>app/Plugins/PaypalSource</code> directory  </p>
+
+<pre><code>cd app/Plugins  
+git clone https://github.com/jlkaufman/cakephp-paypal-rest-client.git PaypalSource
 </code></pre>
 
-<ol>
-<li>Install with <em>composer</em>
-</li>
-</ol><pre><code>    "require": {
-        "jlkaufman/cakephp-paypal-rest-client": "0.1-alpha"
-    }
+<p>2) Install with <em>composer</em>  </p>
+
+<pre><code>require": {
+    "jlkaufman/cakephp-paypal-rest-client": "0.1-alpha"
+}
 </code></pre>
 
 <h4>
@@ -103,11 +103,14 @@
 
 <ul>
 <li>
-<p>Add <code>PaypalSource.Paypal</code> to your $uses array.<br><em>E.g.:</em> <code>public $uses = array('PaypalSource.Paypal');</code>  </p>
+<p>Add <code>PaypalSource.Paypal</code> to your $uses array.<br>
+<em>E.g.:</em> <code>public $uses = array('PaypalSource.Paypal');</code>  </p>
 
 <p>You can now call the model with <code>$this-&gt;Paypal-&gt;method();</code> from your controller.  </p>
 </li>
-</ul><h4>
+</ul>
+
+<h4>
 <a name="notes-about-response-returned" class="anchor" href="#notes-about-response-returned"><span class="octicon octicon-link"></span></a>Notes about response returned</h4>
 
 <p>All the methods in the Paypal class will return an instance of StdClass. In the documentation we show the object in JSON form, simply for readability. You can access each member of the object using arrow notation. </p>
@@ -119,7 +122,9 @@
 
 <ul>
 <li>$data will contain all the information we're going to send to Paypal</li>
-</ul><p>Credit Card:    </p>
+</ul>
+
+<p>Credit Card:    </p>
 
 <pre><code>$data = array(
     'credit_card' =&gt; array(
@@ -181,8 +186,12 @@ $response = $this-&gt;Paypal-&gt;creditCardPayment($data, $type);
 </code></pre>
 
 <ul>
-<li>$type can either be <code>authorization</code> or <code>sale</code><br><code>sale</code>: A final sale, and will complete the transaction<br><code>authorization</code>: Authorize the card for the amount specified. We will have to capture the payment later.</li>
-</ul><h5>
+<li>$type can either be <code>authorization</code> or <code>sale</code><br>
+<code>sale</code>: A final sale, and will complete the transaction<br>
+<code>authorization</code>: Authorize the card for the amount specified. We will have to capture the payment later.</li>
+</ul>
+
+<h5>
 <a name="example-response" class="anchor" href="#example-response"><span class="octicon octicon-link"></span></a>Example response</h5>
 
 <pre><code>{
@@ -261,7 +270,9 @@ $response = $this-&gt;Paypal-&gt;captureAuthorization($data);
 <li>
 <code>authorization_id</code> is stored in the response object returned by <code>Paypal::creditCardPayment()</code> in <code>$response-&gt;transaction-&gt;authorization-&gt;id</code>
 </li>
-</ul><h5>
+</ul>
+
+<h5>
 <a name="example-capture-response" class="anchor" href="#example-capture-response"><span class="octicon octicon-link"></span></a>Example Capture Response</h5>
 
 <pre><code>{
@@ -333,7 +344,9 @@ $response = $this-&gt;Paypal-&gt;voidAuthorization($data);
 <li>
 <code>authorization_id</code> is stored in the response object returned by <code>Paypal::creditCardPayment()</code> in <code>$response-&gt;transaction-&gt;authorization-&gt;id</code>
 </li>
-</ul><h5>
+</ul>
+
+<h5>
 <a name="example-response-1" class="anchor" href="#example-response-1"><span class="octicon octicon-link"></span></a>Example Response</h5>
 
 <pre><code>{
@@ -409,7 +422,9 @@ $response = $this-&gt;Paypal-&gt;refundPayment($data);
 <li>
 <code>payment_id</code> is stored in the response object returned by <code>Paypal::creditCardPayment()</code> in <code>$response-&gt;transaction-&gt;sale-&gt;id</code>
 </li>
-</ul><h5>
+</ul>
+
+<h5>
 <a name="example-response-2" class="anchor" href="#example-response-2"><span class="octicon octicon-link"></span></a>Example Response</h5>
 
 <pre><code>{
